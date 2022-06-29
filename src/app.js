@@ -25,11 +25,13 @@ server.use((req, res, next) => {
 const authRoutes = require('./routes/auth.router');
 const characterRoutes = require('./routes/character.router');
 const movieRoutes = require('./routes/movie.router');
+const genreRoutes = require('./routes/genre.router');
 
 //Routes
 server.use('/auth', authRoutes);
 server.use('/character', characterRoutes);
-server.use('/movie', characterRoutes);
+server.use('/movie', movieRoutes);
+server.use('/genre', genreRoutes);
 
 // Error catching endware.
 server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
