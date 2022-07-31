@@ -5,14 +5,14 @@ module.exports = (sequelize) => {
   // defino el modelo
     sequelize.define('character', {
         id:{
-            type: DataTypes.UUID,
-            allowNull: false,
-            defaultValue: DataTypes.UUIDV4,
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
             primaryKey: true
         },
         name: {
             type: DataTypes.STRING,
             allowNull: false,
+            unique: true
         },
         age: {
             type: DataTypes.INTEGER,

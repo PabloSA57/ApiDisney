@@ -2,9 +2,30 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
-//const routes = require('./routes/index.js');
+const fs = require('fs');
+const path = require('path');                             
 
+//const routes = require('./routes/index.js');
 require('./db.js');
+
+// swagger
+const swaggerUI = require('swagger-ui-express');
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerSpec = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "Disney API",
+      version: "1.0.0"
+    },
+    server: [
+      {
+        url: "http://localhost:3001"
+      }
+    ]
+  },
+  apis: [`${path.join(__dirname, "./routes/*.js")}`]
+}
 
 const server = express();
 
@@ -21,6 +42,7 @@ server.use((req, res, next) => {
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
   next();
 });
+server.use("/api-doc", swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(swaggerSpec)))
 
 const authRoutes = require('./routes/auth.router');
 const characterRoutes = require('./routes/character.router');
@@ -29,9 +51,9 @@ const genreRoutes = require('./routes/genre.router');
 
 //Routes
 server.use('/auth', authRoutes);
-server.use('/character', characterRoutes);
-server.use('/movie', movieRoutes);
-server.use('/genre', genreRoutes);
+server.use('/characters', characterRoutes);
+server.use('/movies', movieRoutes);
+server.use('/genres', genreRoutes);
 
 // Error catching endware.
 server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars

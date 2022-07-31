@@ -18,8 +18,8 @@ module.exports = (sequelize) => {
             allowNull: false
         },
         creationdate: {
-            type: DataTypes.DATE,
-            defaultValue: DataTypes.DATE
+            type: DataTypes.STRING,
+            allowNull: false
         },
         calification: {
             type: DataTypes.FLOAT,
