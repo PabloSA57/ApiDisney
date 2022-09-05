@@ -8,7 +8,7 @@ const {
 console.log(DB_USER)
 
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/apidisney`, {
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 });
