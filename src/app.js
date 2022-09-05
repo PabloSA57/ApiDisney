@@ -3,7 +3,11 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const fs = require('fs');
-const path = require('path');                             
+const path = require('path');  
+const {Router} = require ("express");
+
+
+const router = Router();                           
 
 //const routes = require('./routes/index.js');
 require('./db.js');
@@ -50,6 +54,7 @@ const movieRoutes = require('./routes/movie.router');
 const genreRoutes = require('./routes/genre.router');
 
 //Routes
+router.get('/', (req, res, next) => {res.send('Hola Api disney')})
 server.use('/auth', authRoutes);
 server.use('/characters', characterRoutes);
 server.use('/movies', movieRoutes);
